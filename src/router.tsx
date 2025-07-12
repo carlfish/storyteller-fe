@@ -27,28 +27,30 @@ export async function storyLoader({ params }: LoaderFunctionArgs) {
   }
 }
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: 'about',
-        element: <About />,
-      },
-      {
-        path: 'dashboard',
-        element: <Dashboard />,
-      },
-      {
-        path: 'stories/:storyId',
-        element: <Story />,
-        loader: storyLoader,
-      },
-    ],
-  },
-])
+export function initRouter() {
+  return createBrowserRouter([
+    {
+      path: '/',
+      element: <App />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: 'about',
+          element: <About />,
+        },
+        {
+          path: 'dashboard',
+          element: <Dashboard />,
+        },
+        {
+          path: 'stories/:storyId',
+          element: <Story />,
+          loader: storyLoader,
+        },
+      ],
+    },
+  ])
+}
