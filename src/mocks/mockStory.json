@@ -1,56 +1,100 @@
 {
   "characters": [
     {
-      "name": "Vesarin Thaloril",
-      "role": "Human strategist and negotiator skilled in diplomacy and political intrigue",
-      "bio": "Tall, lean human with sharp green eyes and silver-streaked black hair, wearing a finely tailored but travel-worn cloak with city-state insignias. He is cautious, superstitious about birdsong omens, and admires Jorven's straightforward honesty as a balance to his own nature. Respected leader archetype."
+      "name": "Selindra Velarion",
+      "role": "Elven scout and tracker",
+      "bio": "Selindra is a lithe and agile elf with long silver hair and emerald eyes. Known for her keen senses and silent movements, she serves as the group's scout, adept at navigating forests and spotting danger before it arrives. She is calm and introspective but fiercely loyal. She respects bromantly the dwarf of the group, admiring his steadfast nature and strength which complements her own finesse. In the story, her sharp instincts and vigilance help the group detect impending threats, and she remains poised and cautious, always ready to act."
     },
     {
-      "name": "Jorven Bloodmaw",
-      "role": "Half-orc tracker and survivalist, talented in wilderness navigation and foraging",
-      "bio": "Imposing figure with broad shoulders, olive-gray skin, and a prominent tusk. Dark braided hair adorned with feathers and beads representing tribal rites. A natural warrior with a reflective side shown through his enjoyment of poetry and quotation of verses. Protective and encouraging toward Maelin's engagement with tangible realities."
+      "name": "Borin Hammerfall",
+      "role": "Dwarven warrior and protector",
+      "bio": "Borin is a stout dwarf with braided auburn hair and a thick beard, always clad in sturdy armor. He carries a heavy axe and is the shield of the party, defending his comrades with unwavering courage. Gruff but with a heart of gold, he values honor and camaraderie above all. He has a protective fondness for the halfling in their group, often teasing but deeply caring for her safety. Throughout the story, Borin is watchful and wary of strangers, balancing caution with a readiness to act, and is pragmatic about the dangers they face."
     },
     {
-      "name": "Maelin Sunquill",
-      "role": "Elf scholar and ancient languages expert adept at deciphering mystical texts and runes",
-      "bio": "Lithe elven woman with alabaster skin, luminous lavender eyes, and long braided copper hair bound with ribbons matching her scholarly robes. Ink-stained delicate hands from years of study. Has a playful streak revealed through a raucous laugh and love for bawdy tavern songs. Shares a fond rivalry with Vesarin over treaty interpretations."
+      "name": "Lyra Thistlebrook",
+      "role": "Halfling healer and alchemist",
+      "bio": "Lyra is a small, sprightly halfling with curly chestnut hair and sparkling hazel eyes. She wears vibrant clothes adorned with pouches full of herbs and potions. Quick-witted and cheerful, she tends to the group's wounds and brews remedies. She admires the elf's calm wisdom and looks up to her as a guide through the wilds, fostering a close friendship filled with mutual respect. In the story, Lyra is lively and brave, ready to confront danger alongside her comrades and intrigued by new stories and allies."
     },
     {
-      "name": "Sora",
-      "role": "Barmaid at the tavern",
-      "bio": "A diligent barmaid who tends to patrons, ensuring they have ample drink and maintaining the warm, bustling atmosphere of the tavern. Attentive and part of the tavern's lively environment."
+      "name": "Cora",
+      "role": "Innkeeper and barmaid at the Ogre's Flagon",
+      "bio": "Cora is the lively and dependable barmaid at the Ogre's Flagon, a warm and welcoming tavern. She ensures all patrons have their fill of drink and contributes to the friendly atmosphere. She prepares her famous stew, which is noted for its secret ingredient that makes it legendary among locals and the adventurers alike. She shares the inn with her husband, Loric."
     },
     {
       "name": "Loric",
-      "role": "Cook at the tavern",
-      "bio": "Responsible for preparing hearty stew for the patrons that fills their bellies. Contributes to the tavern's warmth and comfort."
+      "role": "Cook at the Ogre's Flagon",
+      "bio": "Loric is Cora's husband and the cook at the Ogre's Flagon tavern. He fills the patrons' bellies with his hearty stew, providing comfort and sustenance. His cooking, in combination with Cora's drink service, makes the tavern a favored resting place for adventurers."
+    },
+    {
+      "name": "Dain",
+      "role": "Scarlet Knight and lone traveler",
+      "bio": "Dain is a tall man with a scarred face, wearing a mail shirt and carrying a longsword at his side. He bears a faded crimson sword tattoo on his arm, marking him as a member of the Brotherhood of the Red Sword, a group not known for solitary travel. He arrived at the Ogre's Flagon alone, exhausted and wary, carrying a sealed scroll from the Prince Regent with an urgent message. He reveals having barely escaped a deadly ambush involving dark, twisted creatures near Baron Cragpass. His presence introduces a serious threat and a new quest to the group."
     }
   ],
   "chapters": [
     {
-      "title": "After the Battle: Revelations by the Firelight",
-      "summary": "Following a victorious battle against orc raiders near the Sword Peaks, the Companions set up camp in a forest clearing to rest and tend to their wounds, showcasing their resilience and camaraderie. Later that night, they gather in a warm, bustling tavern near the same mountains, where the atmosphere is lively and comforting. Sora, the attentive barmaid, serves the group, while Loric provides a hearty stew that sustains their spirits. Jorven raises a toast celebrating their achievements, reflecting his appreciation for their success; Maelin responds with humility, revealing her modest nature. Vesarin underscores the significance of their victories, emphasizing strategic gains. Their conversation shifts to upcoming challenges in the mountainous terrain, revealing their forward-thinking and concern for future threats. Maelin shares a crucial discovery—a mysterious rune found in ancient ruins—hinting at dangers beyond the known orc bandits. This chapter establishes the group's dynamics, their environment encompassing the forest clearing and the lively tavern, and introduces an element of mystery and impending threat through Maelin's find."
+      "title": "A Stranger's Warning",
+      "summary": "At the warm and lively Ogre's Flagon tavern in Hilverton-on-Pyne, Cora tends to patrons while Loric's stew feeds them. Adventurers Lyra, Borin, and Selindra relax by the fireplace, enjoying camaraderie. Suddenly, an unusual tapping signals something amiss. A tall, scarred man named Dain, clad in worn mail and bearing a Brotherhood of the Red Sword tattoo, enters, drawing wary attention. Invited by Lyra, Dain reveals his mission from the Prince Regent: to deliver an ultimatum to Baron Cragpass. He recounts an ambush by the Baron's men and sinister creatures, barely surviving, and shows a sealed scroll as proof. Later, upstairs above the tavern, Selindra, Borin, and Lyra prepare for the dangerous journey ahead, acknowledging the threat Dain described and resolving to depart at dawn to investigate the dark events around Baron Cragpass and the lurking creatures."
     }
   ],
   "scenes": [],
   "old_messages": [
     {
       "type": "HumanMessage",
-      "content": "The night outside is cold, but inside the tavern it is warm and bustling. Sora, the barmaid, makes sure all the patrons have their fill of drink, while Loric's stew fills their bellies. A fire burns in the hearth. In the corner, the Companions sit around a table enjoying a much-deserved chance to relax after a long adventure. Jorven raises his mug of ale. \"To us, the best adventurers this side of the Sword Peaks!\" Maelin chuckles. \"I'm not sure fighting a few orc raiders qualifies us for that accolate, but I'll take it.\""
+      "content": "The night outside is cold, but inside the Ogre's Flagon it is warm and the mood is high. Cora makes sure the patrons all have their fill of drink, while her husband Loric's stew fills their bellies. A fire burns in the hearth.\n\nIn the corner near the fireplace, a group of adventurers sit around a table, enjoying a much-deserved chance to relax. Lyra raises a mug of ale that looks far too large for her. \"To us, the finest adventurers this side of the Axe Peaks!\"\n\nBorin chuckles. \"Chases off a couple of orc bandits and she thinks the bards are lining up to write odes about us.\""
     },
     {
       "type": "AIMessageChunk",
-      "content": "Vesarin leans back, swirling the amber liquid in his goblet. \"Titles are earned on the field and at the table alike. Tonight, our victories are ours to savor without debate.\" The crackling fire casts flickering shadows on his sharp features, as his silver-streaked hair gleams softly. Outside, a faint rustle hints at the stirring night, but within, the merriment holds strong.\n\nJorven's deep voice lowers as he adds, \"Tomorrow, the mountains call again. The orcs won't stay quiet long. We need to be ready—for strategy, for survival.\" Maelin taps her fingers against her mug thoughtfully. \"That reminds me, I found something perplexing in the ruins we explored. A rune etched deep beneath the altar—it might hint at something larger than mere bandits.\" Her lavender eyes momentarily glow, reflecting the firelight and teasing secrets yet to be uncovered."
-    }
-  ],
-  "current_messages": [
+      "content": "Selindra, seated beside Borin, smiled quietly, her emerald eyes reflecting the flickering firelight. “Let them think what they want,” she said softly, lifting her own slender cup. “We’ve earned this moment of peace.” The warmth of the tavern was a welcome reprieve from the biting chill outside, and for once, the weight of their weapons and worries felt distant.\n\nLyra grinned, cheeks flushed from ale and laughter. “Besides, I happen to know Cora’s secret ingredient makes that stew legendary. That’s a kind of magic, too.” Borin gave a hearty laugh, the sound rumbling through the room, his braided beard catching the fire’s glow as he leaned back proudly. The camaraderie was the kind of magic no evil could break—an unspoken bond forged through countless shared dangers.\n\nFrom her seat, Selindra’s sharp ears caught a faint but unusual noise—an almost imperceptible tap, tap, tapping beyond the tavern door. Her gaze flicked to the window, where the night breathed shadows. The revelry hummed around her, but a ripple of instinct prickled her skin. Something was coming."
+    },
     {
       "type": "HumanMessage",
-      "content": "Maelin wakes up, hearing glass breaking."
+      "content": "Selindra turned to Lyra. \"Do you hear that?\"\n\n\"The tap-tap-tapping? Probably just a raven.\" Lyra shrugged.\n\n\"A grim portent nonetheless. Something isn't right here.\""
     },
     {
       "type": "AIMessageChunk",
-      "content": "Maelin’s eyes snapped open, the shards of a distant crash ringing sharply in her ears. The tavern’s dim glow flickered and danced wildly as shadows darted across the walls—the shattered glass from a hastily thrown tankard glittering across the floor. Her heart hammered, adrenaline stirring beneath her skin as she sat up, clutching the edge of the rough-hewn table. Voices, harsh and urgent, sliced through the bustle; a scuffle was unfolding outside the common room.\n\nShe glanced toward the tavern’s stout wooden door, noticing Vesarin already rising, his sharp green eyes narrowing with grim calculation. Jorven grunted low and moved to block the doorway, while Sora hurried behind the bar, her face tense but determined. The warmth and laughter that had filled the room only moments before had shifted into a taut silence, pregnant with anticipation and the echo of something far more dangerous lurking beyond."
+      "content": "Borin’s laughter died down as he caught the tension threading through Selindra’s voice. His hand instinctively moved to the handle of his axe, eyes narrowing toward the door. “I don’t like the feel of this either. Ravens don’t usually announce themselves with a knocking rattle.”\n\nThe tavern’s warmth suddenly felt brittle, as if the fire flickered to match the unease growing between them. Selindra slid from her seat with a fluid grace, the silver strands of her hair catching the hearthlight like spun moonbeams. She moved toward the heavy wooden door, each step measured and silent.\n\nLyra rose quickly, slipping a small vial from her pouch, fingers curling around the glass as if ready to unleash its contents. “If it’s trouble, let’s be ready. We can’t afford surprises.” The room’s chatter dimmed, all eyes turning to the door where the tapping persisted—a slow, deliberate rhythm that promised no friendly visitor."
+    },
+    {
+      "type": "HumanMessage",
+      "content": "The door swung open, letting in a gust of the cold outside air. Standing in the doorway was a tall man with a scarred face, a mail shirt that had seen better days, a longsword buckled at his side. He stood for a moment silhouetted in the door, to a hushed silence that was only broken by one of the patrons seated by the entrance yelling. \"Shut the door, you idiot, the cold's supposed to stay outside.\"\n\nThe stranger closed the door behind him and trudged over to sit at the bar, quietly ordering an ale from Cora.\n\n\"Did ye see the tattoo on his arm.\" Borin spoke in a low voice. \"Brotherhood of the Red Sword.\"\n\nSelindra looked skeptical. \"If he's a Scarlet Knight, he's a long way from home. And since when did they travel alone?\""
+    },
+    {
+      "type": "AIMessageChunk",
+      "content": "Borin’s eyes sharpened as he watched the stranger nurse his ale, his scarred face etched with tired resolve. “Aye, the Brotherhood don’t usually stray without a squad. Something’s off—either he’s run from a fight or bringing news worse than the winter chill.”\n\nSelindra’s fingers brushed the hilt of her dagger beneath the table. Her gaze locked on the man’s arm briefly, where the faded crimson sword tattoo peeked from beneath his sleeve. “Or he’s hiding something,” she murmured. The tavern, once filled with laughter, now hummed with wary anticipation as the firelight danced across the cold steel at his side.\n\nLyra, still clutching her vial, leaned in quietly. “Maybe we should speak with him—find out what ghosts trail him here. If he’s alone, he might be desperate or dangerous.” A flicker of cautious determination flashed in Selindra’s emerald eyes; once more, the threat lurking beyond the warm hearth was beginning to stir."
+    },
+    {
+      "type": "HumanMessage",
+      "content": "Lyra squared her shoulders and hopped up off her chair. \"Well, you don't learn anything sitting back and staring.\" She weaved between the patrons and climbed up on the stool next to the stranger, exchanging a silver piece for two cups of Cora's better red wine and offering one to him.\n\n\"Welcome to Hilverton-on-Pyne, town voted least likely for anybody to give a damn about three years running. Don't get many strangers around here. Anyway, I'm Lyra, what's your name, friend?\""
+    },
+    {
+      "type": "AIMessageChunk",
+      "content": "The stranger glanced up, eyes heavy but alert, accepting the cup with a nod. His voice was gravelly, edged with exhaustion. “Call me Dain. I’m just passing through.” He took a slow sip, savoring the warmth of the wine more than the ale. “Not many welcome in Hilverton, I reckon.”\n\nSelindra eased closer, still silent but watching his every move, reading the slightest tension in his stiff posture. Borin grunted from behind her, resting a hand on the battle-axe leaned against the table, ready but patiently waiting. Dain’s glance flickered briefly toward the door, as if haunted by shadows left outside.\n\nLyra’s eyes searched his face for cracks, for the story hidden behind those weary scars. “Passing through, eh? The Brotherhood of the Red Sword doesn’t usually wander alone. You’ve got stories to tell, Dain, even if you would rather keep them locked tight.” His grip tightened slightly around the cup—soon, the truth would spill like the firelight across their tangled fates."
+    },
+    {
+      "type": "HumanMessage",
+      "content": "Dain glanced up from his wine, looking past Lyra. \"Your friends seem to be in a competition to out-lurk each other. From the looks of the three of you, there might just be something in my story that we can work to our mutual benefit. How about we all go back to your cozy table by the fire and chat about it? I'm still cold from walking through all that.\" He gestured at the window, battered from outside by the cold night wind."
+    },
+    {
+      "type": "AIMessageChunk",
+      "content": "Selindra’s eyes sparkled with cautious interest as she nodded gracefully. “A warm fire is a better place for exchanging tales.” She motioned for Borin and Lyra to join them, her movements fluid and deliberate, every bit the silent shadow poised to spring into action if needed.\n\nBorin grunted approvingly, hefting his axe with a heavy thud as he rose. “I don’t trust wanderers who claim kindness just to warm their bones, but warmth can’t hurt.” His gaze locked briefly on Dain’s scarred hands, fingers twitching near the hilt of his longsword—a silent warning.\n\nLyra skipped up beside Selindra with a flicker of determination, her lively eyes alight. “Let’s hear this story, Dain. If it’s a path that leads to safety instead of danger, we’ll tread it together.” The hearth crackled, flames casting long, dancing shadows as the four of them settled around the table, the chill of night pushed back by both fire and fragile trust."
+    },
+    {
+      "type": "HumanMessage",
+      "content": "Dain took his seat at the table, looking between the faces of the three adventurers, and took a large gulp of wine before speaking.\n\n\"Two weeks ago, the Prince Regent sent me to deliver a message to Baron Cragpass.\" \n\nBorin drew a quick breath. \"Not a friendly message, I am guessing.\" The Baron had a reputation as a harsh ruler, and there were rumours whispered among the serfs that he even experimented with dark magics, but his fort defending Cragpass was so important to the defense of the region that the Prince was reluctant to challenge him.\n\n\"Aye. We were a dozen knights leading a company of battle-hardened soldiers. Our job was to deliver an ultimatum. As we left, we were set upon by the Baron's men and…\" he shuddered. \"…more. If I'd had a slower horse, I'd be dead with them.\""
+    },
+    {
+      "type": "AIMessageChunk",
+      "content": "Selindra leaned forward, her emerald eyes narrowing with sharp curiosity. \"More than the Baron's men? What... horrors did you face beyond mere soldiers?\" The flickering firelight caught the tension etched deep into Dain’s scarred features.\n\nDain swallowed hard, his hand trembling slightly as he gripped his cup again. \"Creatures. Twisted things—half-man, half-shadow—lurking beyond the woods near Cragpass. Not natural by any means. Our knights became prey in the night, hunted like animals. I barely escaped with my life... and this message.\" He reached inside his worn cloak, pulling out a sealed scroll marked with the prince's sigil.\n\nBorin’s face grew grim, a low rumble escaping his throat. \"If the Baron’s dealt a hand in such dark dealings, it could tear the whole region apart. We can’t let this fester.” Lyra’s small hand rested on the vial at her belt, determination burning in her eyes. “Then we have a choice—to follow this thread and see where the darkness leads, or bury our heads and hope it doesn’t come knocking.” The fire in their hearts now burned fiercer than the blaze before them."
+    },
+    {
+      "type": "HumanMessage",
+      "content": "Lyra looked wistfully at her mug of ale. \"I was hoping to get acquainted with several more of you tonight, but I am guessing any moment Selindra is going to tell us that we'd better be up early in the morning.\"\n\nSelindra looked slightly taken aback. \"You know me too well, Lyra. If darkness is our enemy, daylight is our ally, and we'd be best up in time to make the most of it.\" \n\nSelindra turned to Dain. \"Whether you're running towards or away from the darkness that's chasing you, we'll help.\" Her eyes sparkled, adding after a pause. \"So long as we can trust that the Prince Regent's favour is worth something.\"\n\nWith a petulant sigh Lyra tipped back the mug, downing the last of the ale in one long gulp. \"See you at dawn, Knight.\" The trio departed upstairs to the room they shared above the inn."
+    },
+    {
+      "type": "AIMessageChunk",
+      "content": "The night outside deepened, the cold wind rattling the shutters as the three companions ascended the creaking stairs, their footsteps muffled by worn rugs. In the quiet of their shared room, Selindra peeled off her cloak, the silver strands of her hair cascading over her shoulders like moonlight spilling into shadow. Her emerald eyes, still sharp with the evening’s revelations, softened for a moment as she regarded Borin.\n\nBorin sat on the edge of the bed, hefting his axe thoughtfully. “This Dain could be trouble, but the threat he spoke of... it’s no ordinary skirmish. We’ll need to be ready for anything at Cragpass.” His voice was low but resolute, a steady anchor against the rising tide of uncertainty.\n\nLyra busied herself arranging herbs and salves on the small wooden table, her fingers deft despite the tension in her shoulders. “We’ll need every ounce of wit and courage, and maybe a little magic, to face what’s coming. If those twisted creatures are real, it’ll test everything we hold dear.” The firelight flickered behind her, casting dancing shadows that seemed to whisper of the trials yet to come."
     }
-  ]
+  ],
+  "current_messages": []
 }

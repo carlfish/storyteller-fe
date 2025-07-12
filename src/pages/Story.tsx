@@ -1,4 +1,5 @@
 import { useLoaderData } from 'react-router-dom'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import type { Story as StoryType, Message, Character } from '../services/api'
 
 interface StoryLoaderData {
@@ -7,6 +8,79 @@ interface StoryLoaderData {
 
 const Story = () => {
   const { story } = useLoaderData() as StoryLoaderData
+  const [displayedMessages, setDisplayedMessages] = useState<Message[]>([])
+  const [hasMoreMessages, setHasMoreMessages] = useState(false)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [messagesLoadedCount, setMessagesLoadedCount] = useState(0)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
+  const scrollPositionRef = useRef<number>(0)
+
+  // Combine all messages (old_messages + current_messages)
+  const allMessages = [...(story.old_messages || []), ...(story.current_messages || [])]
+
+  // Initialize with last 10 messages
+  useEffect(() => {
+    const initialMessageCount = Math.min(10, allMessages.length)
+    const startIndex = Math.max(0, allMessages.length - initialMessageCount)
+    
+    setDisplayedMessages(allMessages.slice(startIndex))
+    setMessagesLoadedCount(initialMessageCount)
+    setHasMoreMessages(startIndex > 0)
+  }, [allMessages.length])
+
+  // Scroll to bottom on initial load and when new messages are added to current_messages
+  useEffect(() => {
+    if (messagesContainerRef.current && !isLoadingMore) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight
+    }
+  }, [displayedMessages.length, isLoadingMore])
+
+  // Load more messages (10 at a time from the beginning of old_messages)
+  const loadMoreMessages = useCallback(() => {
+    if (isLoadingMore || !hasMoreMessages) return
+
+    setIsLoadingMore(true)
+    
+    // Save current scroll position
+    if (messagesContainerRef.current) {
+      scrollPositionRef.current = messagesContainerRef.current.scrollHeight
+    }
+
+    setTimeout(() => {
+      const currentlyLoaded = messagesLoadedCount
+      const messagesToLoad = Math.min(10, allMessages.length - currentlyLoaded)
+      const newStartIndex = Math.max(0, allMessages.length - currentlyLoaded - messagesToLoad)
+      
+      if (messagesToLoad > 0) {
+        const newMessages = allMessages.slice(newStartIndex, allMessages.length - currentlyLoaded)
+        setDisplayedMessages(prev => [...newMessages, ...prev])
+        setMessagesLoadedCount(prev => prev + messagesToLoad)
+        setHasMoreMessages(newStartIndex > 0)
+      }
+      
+      setIsLoadingMore(false)
+    }, 500) // Simulate loading delay
+  }, [allMessages, messagesLoadedCount, isLoadingMore, hasMoreMessages])
+
+  // Handle scroll to load more messages
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const { scrollTop } = e.currentTarget
+    
+    // Load more when user scrolls near the top
+    if (scrollTop < 100 && hasMoreMessages && !isLoadingMore) {
+      loadMoreMessages()
+    }
+  }, [hasMoreMessages, isLoadingMore, loadMoreMessages])
+
+  // Maintain scroll position after loading older messages (but not on initial load)
+  useEffect(() => {
+    if (messagesContainerRef.current && scrollPositionRef.current > 0 && isLoadingMore) {
+      const newScrollHeight = messagesContainerRef.current.scrollHeight
+      const heightDifference = newScrollHeight - scrollPositionRef.current
+      messagesContainerRef.current.scrollTop = heightDifference
+      scrollPositionRef.current = 0
+    }
+  }, [displayedMessages.length, isLoadingMore])
 
   const formatMessage = (message: Message, index: number) => {
     const isUserMessage = message.type === 'HumanMessage'
@@ -73,9 +147,32 @@ const Story = () => {
             Current Story
           </h2>
 
-          <div className="space-y-0 min-h-[400px]">
-            {story.current_messages && story.current_messages.length > 0 ? (
-              story.current_messages.map((message: Message, index: number) =>
+          <div 
+            ref={messagesContainerRef}
+            onScroll={handleScroll}
+            className="space-y-0 min-h-[400px] max-h-[600px] overflow-y-auto"
+          >
+            {/* Loading indicator at top */}
+            {isLoadingMore && (
+              <div className="text-center py-4">
+                <div className="text-sm text-gray-500">Loading older messages...</div>
+              </div>
+            )}
+            
+            {/* Load more button (alternative to scroll trigger) */}
+            {hasMoreMessages && !isLoadingMore && (
+              <div className="text-center py-4">
+                <button
+                  onClick={loadMoreMessages}
+                  className="text-sm text-blue-600 hover:text-blue-800 underline"
+                >
+                  Load older messages
+                </button>
+              </div>
+            )}
+
+            {displayedMessages.length > 0 ? (
+              displayedMessages.map((message: Message, index: number) =>
                 formatMessage(message, index)
               )
             ) : (
