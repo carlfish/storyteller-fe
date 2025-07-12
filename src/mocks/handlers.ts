@@ -1,99 +1,95 @@
 import { http, HttpResponse } from 'msw'
+import type { Story, StorySummary, CommandRequest, CommandResponse } from '../services/api'
+import mockStoryData from './mockStory.json'
 
-interface Story {
-  id: string
-  title: string
-  content: string
-  author: string
-  createdAt: string
-  updatedAt: string
-  published: boolean
+// Get base URL to match API calls
+const getBaseUrl = () => {
+  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
 }
 
 export const handlers = [
-  // Get all stories
-  http.get('/api/stories', () => {
-    return HttpResponse.json([
+  // Create new story - matches POST /stories
+  http.post(`${getBaseUrl()}/stories`, async () => {
+    // Generate a UUID for the new story
+    const storyId = crypto.randomUUID()
+
+    // Create empty story object matching the real API schema
+    const story: Story = {
+      id: storyId,
+      characters: [],
+      chapters: [],
+      scenes: [],
+      old_messages: [],
+      current_messages: [],
+    }
+
+    // Return 201 with both Location header and Story object
+    return HttpResponse.json(story, {
+      status: 201,
+      headers: {
+        Location: `/stories/${storyId}`,
+      },
+    })
+  }),
+
+  // Get single story - matches GET /stories/{story_uuid}
+  http.get(`${getBaseUrl()}/stories/:storyId`, ({ params }) => {
+    const { storyId } = params
+
+    // Load story data from JSON file and update the ID to match the request
+    const story: Story = {
+      ...mockStoryData,
+      id: storyId as string,
+    }
+
+    return HttpResponse.json(story)
+  }),
+
+  // Get stories - matches GET /stories/
+  http.get(`${getBaseUrl()}/stories/`, () => {
+    const stories: StorySummary[] = [
       {
-        id: 'fce8c922-c48d-4a95-b094-a3050e0cafb5',
-        title: 'My First Story',
-        content: 'This is the content of my first story...',
+        id: '304f17a5-571b-4bd9-9827-2245d96685f5',
+        title: 'The Beginning',
         author: 'John Doe',
+        summary: 'Our heroes meet and begin their quest',
         createdAt: '2024-01-15T10:00:00Z',
         updatedAt: '2024-01-15T10:00:00Z',
-        published: true
+        published: false,
       },
       {
-        id: '2adbd315-0d53-4f5e-86c7-91cbefcb0d02',
-        title: 'Draft Story',
-        content: 'This is a draft story...',
-        author: 'Jane Smith',
-        createdAt: '2024-01-16T14:30:00Z',
-        updatedAt: '2024-01-16T15:00:00Z',
-        published: false
-      }
-    ])
+        id: '8bd438f1-9410-4a2d-a9e5-00ebd21a2075',
+        title: 'The Middle',
+        author: 'Jane Doe',
+        summary: 'Our heroes continue their quest',
+        createdAt: '2024-01-15T10:00:00Z',
+        updatedAt: '2024-01-15T10:00:00Z',
+        published: false,
+      },
+      {
+        id: '123e4567-e89b-12d3-a456-426614174000',
+        title: 'The End',
+        author: 'John Doe',
+        summary: 'Our heroes reach the end of their quest',
+        createdAt: '2024-01-15T10:00:00Z',
+        updatedAt: '2024-01-15T10:00:00Z',
+        published: false,
+      },
+    ]
+
+    return HttpResponse.json(stories)
   }),
 
-  // Get single story
-  http.get('/api/stories/:storyId', ({ params }) => {
-    const { storyId } = params
-    
-    return HttpResponse.json({
-      id: storyId,
-      title: 'Sample Story',
-      content: 'This is the content of the story...',
-      author: 'Current User',
-      createdAt: '2024-01-15T10:00:00Z',
-      updatedAt: '2024-01-15T10:00:00Z',
-      published: false
-    })
-  }),
+  // Execute command on story - matches POST /stories/{story_uuid}
+  http.post(`${getBaseUrl()}/stories/:storyId`, async ({ request }) => {
+    const command = (await request.json()) as CommandRequest
 
-  // Create new story
-  http.post('/api/stories', async ({ request }) => {
-    const newStory = await request.json() as Partial<Story>
-    
-    return HttpResponse.json({
-      id: crypto.randomUUID(),
-      title: newStory.title || 'Untitled',
-      content: newStory.content || '',
-      author: 'Current User',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      published: false
-    }, { status: 201 })
-  }),
+    // Mock command response
+    const response: CommandResponse = {
+      status: 'success',
+      messages: [`Command '${command.command}' executed successfully`, 'The story continues...'],
+    }
 
-  // Update story
-  http.put('/api/stories/:storyId', async ({ params, request }) => {
-    const { storyId } = params
-    const updates = await request.json() as Partial<Story>
-    
-    return HttpResponse.json({
-      id: storyId as string,
-      title: updates.title || 'Untitled',
-      content: updates.content || '',
-      author: 'Current User',
-      createdAt: '2024-01-15T10:00:00Z',
-      published: updates.published || false,
-      updatedAt: new Date().toISOString()
-    })
+    return HttpResponse.json(response)
   }),
-
-  // Delete story
-  http.delete('/api/stories/:storyId', () => {
-    return new HttpResponse(null, { status: 204 })
-  }),
-
-  // Publish story
-  http.post('/api/stories/:storyId/publish', ({ params }) => {
-    const { storyId } = params
-    
-    return HttpResponse.json({
-      id: storyId,
-      published: true,
-      publishedAt: new Date().toISOString()
-    })
-  })
 ]

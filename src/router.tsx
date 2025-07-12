@@ -12,12 +12,18 @@ export async function storyLoader({ params }: LoaderFunctionArgs) {
   if (!storyId) {
     throw new Error('Story ID is required')
   }
-  
+
   try {
     const story = await api.getStory(storyId)
     return { story }
   } catch (error) {
-    throw new Response('Story not found', { status: 404 })
+    if (error instanceof Error) {
+      if (error.message === 'Story not found') {
+        throw new Response('Story not found', { status: 404 })
+      } else {
+        throw new Response(error.message, { status: 500 })
+      }
+    }
   }
 }
 

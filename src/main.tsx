@@ -18,6 +18,6 @@ enableMocking().then(() => {
       >
         <RouterProvider router={router} />
       </Auth0Provider>
-    </StrictMode>,
+    </StrictMode>
   )
 })

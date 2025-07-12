@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import reactLogo from '../assets/react.svg'
 import { api } from '../services/api'
-import type { Story } from '../services/api'
+import type { StorySummary } from '../services/api'
 
 const Home = () => {
-  const [stories, setStories] = useState<Story[]>([])
+  const [stories, setStories] = useState<StorySummary[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -30,11 +29,11 @@ const Home = () => {
   }
 
   return (
-    <div className="container mx-auto px-4">            
+    <div className="container mx-auto px-4">
       {/* Stories List */}
       <div className="max-w-4xl mx-auto mb-8">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Recent Stories</h2>
-        
+
         {loading ? (
           <div className="text-center py-8">
             <div className="text-gray-600">Loading stories...</div>
@@ -49,7 +48,7 @@ const Home = () => {
           </div>
         ) : (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {stories.map((story) => (
+            {stories.map(story => (
               <Link
                 key={story.id}
                 to={`/stories/${story.id}`}
@@ -59,19 +58,19 @@ const Home = () => {
                   <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
                     {story.title}
                   </h3>
-                  <span className={`px-2 py-1 text-xs rounded-full ${
-                    story.published 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-yellow-100 text-yellow-800'
-                  }`}>
+                  <span
+                    className={`px-2 py-1 text-xs rounded-full ${
+                      story.published
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-yellow-100 text-yellow-800'
+                    }`}
+                  >
                     {story.published ? 'Published' : 'Draft'}
                   </span>
                 </div>
-                
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                  {story.content}
-                </p>
-                
+
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{story.summary}</p>
+
                 <div className="text-xs text-gray-500">
                   <div>By {story.author}</div>
                   <div>Updated {formatDate(story.updatedAt)}</div>
