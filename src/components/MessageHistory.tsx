@@ -17,13 +17,16 @@ const MessageHistory = ({ oldMessages, currentMessages, onMessageSubmit }: Messa
   const scrollPositionRef = useRef<number>(0)
 
   // Combine all messages (old_messages + current_messages)
-  const allMessages = useMemo(() => [...(oldMessages || []), ...(currentMessages || [])], [oldMessages, currentMessages])
+  const allMessages = useMemo(
+    () => [...(oldMessages || []), ...(currentMessages || [])],
+    [oldMessages, currentMessages]
+  )
 
   // Initialize with last 10 messages
   useEffect(() => {
     const initialMessageCount = Math.min(10, allMessages.length)
     const startIndex = Math.max(0, allMessages.length - initialMessageCount)
-    
+
     setDisplayedMessages(allMessages.slice(startIndex))
     setMessagesLoadedCount(initialMessageCount)
     setHasMoreMessages(startIndex > 0)
@@ -41,7 +44,7 @@ const MessageHistory = ({ oldMessages, currentMessages, onMessageSubmit }: Messa
     if (isLoadingMore || !hasMoreMessages) return
 
     setIsLoadingMore(true)
-    
+
     // Save current scroll position
     if (messagesContainerRef.current) {
       scrollPositionRef.current = messagesContainerRef.current.scrollHeight
@@ -51,27 +54,30 @@ const MessageHistory = ({ oldMessages, currentMessages, onMessageSubmit }: Messa
       const currentlyLoaded = messagesLoadedCount
       const messagesToLoad = Math.min(10, allMessages.length - currentlyLoaded)
       const newStartIndex = Math.max(0, allMessages.length - currentlyLoaded - messagesToLoad)
-      
+
       if (messagesToLoad > 0) {
         const newMessages = allMessages.slice(newStartIndex, allMessages.length - currentlyLoaded)
         setDisplayedMessages(prev => [...newMessages, ...prev])
         setMessagesLoadedCount(prev => prev + messagesToLoad)
         setHasMoreMessages(newStartIndex > 0)
       }
-      
+
       setIsLoadingMore(false)
     }, 500) // Simulate loading delay
   }, [allMessages, messagesLoadedCount, isLoadingMore, hasMoreMessages])
 
   // Handle scroll to load more messages
-  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
-    const { scrollTop } = e.currentTarget
-    
-    // Load more when user scrolls near the top
-    if (scrollTop < 100 && hasMoreMessages && !isLoadingMore) {
-      loadMoreMessages()
-    }
-  }, [hasMoreMessages, isLoadingMore, loadMoreMessages])
+  const handleScroll = useCallback(
+    (e: React.UIEvent<HTMLDivElement>) => {
+      const { scrollTop } = e.currentTarget
+
+      // Load more when user scrolls near the top
+      if (scrollTop < 100 && hasMoreMessages && !isLoadingMore) {
+        loadMoreMessages()
+      }
+    },
+    [hasMoreMessages, isLoadingMore, loadMoreMessages]
+  )
 
   // Maintain scroll position after loading older messages (but not on initial load)
   useEffect(() => {
@@ -117,8 +123,8 @@ const MessageHistory = ({ oldMessages, currentMessages, onMessageSubmit }: Messa
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-      <div className="p-6">        
-        <div 
+      <div className="p-6">
+        <div
           ref={messagesContainerRef}
           onScroll={handleScroll}
           className="space-y-0 min-h-[400px] max-h-[600px] overflow-y-auto"
@@ -129,7 +135,7 @@ const MessageHistory = ({ oldMessages, currentMessages, onMessageSubmit }: Messa
               <div className="text-sm text-gray-500">Loading older messages...</div>
             </div>
           )}
-          
+
           {/* Load more button (alternative to scroll trigger) */}
           {hasMoreMessages && !isLoadingMore && (
             <div className="text-center py-4">
@@ -154,18 +160,18 @@ const MessageHistory = ({ oldMessages, currentMessages, onMessageSubmit }: Messa
           )}
         </div>
       </div>
-      
+
       {/* Input Area */}
       <div className="border-t border-gray-200 p-4">
         <form onSubmit={handleSubmit} className="flex gap-3">
           <input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={e => setInputValue(e.target.value)}
             placeholder="What do you do next?"
             className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <button 
+          <button
             type="submit"
             disabled={!inputValue.trim()}
             className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"

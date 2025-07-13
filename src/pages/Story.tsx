@@ -14,7 +14,7 @@ const Story = () => {
   const handleMessageSubmit = (content: string) => {
     const newMessage: Message = {
       type: 'HumanMessage',
-      content
+      content,
     }
     setCurrentMessages(prev => [...prev, newMessage])
   }
@@ -52,7 +52,7 @@ const Story = () => {
       </div>
 
       {/* Message History Component */}
-      <MessageHistory 
+      <MessageHistory
         oldMessages={story.old_messages || []}
         currentMessages={currentMessages}
         onMessageSubmit={handleMessageSubmit}
