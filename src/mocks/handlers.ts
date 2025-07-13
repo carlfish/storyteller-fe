@@ -84,6 +84,9 @@ export const handlers = [
   http.post(`${getBaseUrl()}/stories/:storyId`, async ({ request }) => {
     const command = (await request.json()) as CommandRequest
 
+    // Add 5s delay to see loading state
+    await new Promise(resolve => setTimeout(resolve, 5000))
+
     // Mock command response
     const response: CommandResponse = {
       status: 'success',

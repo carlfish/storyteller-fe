@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router-dom'
 import { useState } from 'react'
 import type { Story as StoryType, Character, Message } from '../services/api'
+import { api } from '../services/api'
 import MessageHistory from '../components/MessageHistory'
 
 interface StoryLoaderData {
@@ -11,12 +12,38 @@ const Story = () => {
   const { story } = useLoaderData() as StoryLoaderData
   const [currentMessages, setCurrentMessages] = useState<Message[]>(story.current_messages || [])
 
-  const handleMessageSubmit = (content: string) => {
+  const handleMessageSubmit = async (content: string) => {
     const newMessage: Message = {
       type: 'HumanMessage',
       content,
     }
     setCurrentMessages(prev => [...prev, newMessage])
+
+    const loadingMessage: Message = {
+      type: 'AIMessage',
+      content: '',
+      isLoading: true
+    }
+    setCurrentMessages(prev => [...prev, loadingMessage])
+
+    try {
+      const response = await api.executeCommand(story.id, {
+        command: 'chat',
+        body: content
+      })
+      
+      setCurrentMessages(prev => prev.slice(0, -1))
+      
+      const aiMessages: Message[] = response.messages.map(messageContent => ({
+        type: 'AIMessage',
+        content: messageContent
+      }))
+      
+      setCurrentMessages(prev => [...prev, ...aiMessages])
+    } catch (error) {
+      console.error('Failed to send message:', error)
+      setCurrentMessages(prev => prev.slice(0, -1))
+    }
   }
 
   return (

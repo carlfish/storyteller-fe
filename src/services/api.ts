@@ -33,6 +33,7 @@ export interface ErrorResponse {
 export interface Message {
   type: string
   content: string
+  isLoading?: boolean
 }
 
 export interface StorySummary {

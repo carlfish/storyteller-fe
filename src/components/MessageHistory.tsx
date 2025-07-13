@@ -91,6 +91,7 @@ const MessageHistory = ({ oldMessages, currentMessages, onMessageSubmit }: Messa
 
   const formatMessage = (message: Message, index: number) => {
     const isUserMessage = message.type === 'HumanMessage'
+    const isLoading = message.isLoading
 
     return (
       <div key={index} className={`flex mb-4 ${isUserMessage ? 'justify-end' : 'justify-start'}`}>
@@ -101,8 +102,15 @@ const MessageHistory = ({ oldMessages, currentMessages, onMessageSubmit }: Messa
               : 'bg-gray-100 text-gray-800 rounded-bl-none border border-gray-200'
           }`}
         >
-          <div className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</div>
-          {!isUserMessage && (
+          {isLoading ? (
+            <div className="text-sm leading-relaxed flex items-center">
+              <i className="mi-clock mr-2 animate-pulse"></i>
+              <span className="animate-pulse">Thinking...</span>
+            </div>
+          ) : (
+            <div className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</div>
+          )}
+          {!isUserMessage && !isLoading && (
             <div className="text-xs text-gray-500 mt-2 flex items-center">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
               AI Storyteller
