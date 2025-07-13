@@ -5,7 +5,7 @@ import { api } from './services/api'
 import 'mono-icons/iconfont/icons.css'
 
 const Topbar = () => {
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0()
+  const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0()
   const location = useLocation()
   const navigate = useNavigate()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -15,8 +15,15 @@ const Topbar = () => {
 
   const handleNewStory = async () => {
     try {
+      const accessToken = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
+          scope: "storyteller:use"
+        }
+      })
+      
       // Call the real create story API
-      const story = await api.createStory()
+      const story = await api.createStory(accessToken)
 
       // Navigate to the story using the returned ID
       navigate(`/stories/${story.id}`)

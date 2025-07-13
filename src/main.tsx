@@ -15,6 +15,8 @@ enableMocking().then(() => {
         clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
         authorizationParams={{
           redirect_uri: window.location.origin,
+          audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
+          scope: "openid profile email storyteller:use"
         }}
       >
         <RouterProvider router={router} />

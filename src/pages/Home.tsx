@@ -1,31 +1,76 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 import { api } from '../services/api'
 import type { StorySummary } from '../services/api'
 
 const Home = () => {
+  const { isAuthenticated, isLoading: authLoading, loginWithRedirect, getAccessTokenSilently } = useAuth0()
   const [stories, setStories] = useState<StorySummary[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const fetchStories = async () => {
-      try {
-        const fetchedStories = await api.getStories()
-        setStories(fetchedStories)
-      } catch (err) {
-        setError('Failed to load stories')
-        console.error('Error fetching stories:', err)
-      } finally {
-        setLoading(false)
-      }
+    if (!isAuthenticated && !authLoading) {
+      setLoading(false)
+      return
     }
 
-    fetchStories()
-  }, [])
+    if (isAuthenticated) {
+      const fetchStories = async () => {
+        try {
+          const accessToken = await getAccessTokenSilently({
+            authorizationParams: {
+              audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
+              scope: "storyteller:use"
+            }
+          })
+          const fetchedStories = await api.getStories(accessToken)
+          setStories(fetchedStories)
+        } catch (err) {
+          setError('Failed to load stories')
+          console.error('Error fetching stories:', err)
+        } finally {
+          setLoading(false)
+        }
+      }
+
+      fetchStories()
+    }
+  }, [isAuthenticated, authLoading, getAccessTokenSilently])
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString()
+  }
+
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto text-center py-12">
+          <h1 className="text-4xl font-bold text-gray-800 mb-6">Welcome to Storyteller</h1>
+          <p className="text-xl text-gray-600 mb-8">
+            Create and explore interactive stories with AI assistance
+          </p>
+          <button
+            onClick={() => loginWithRedirect()}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+          >
+            Login to Get Started
+          </button>
+        </div>
+      </div>
+    )
   }
 
   return (

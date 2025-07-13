@@ -51,13 +51,24 @@ const getBaseUrl = () => {
   return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
 }
 
+// Create headers with authorization
+const createHeaders = (accessToken?: string) => {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  }
+  
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`
+  }
+  
+  return headers
+}
+
 export const api = {
-  async createStory(): Promise<Story> {
+  async createStory(accessToken?: string): Promise<Story> {
     const response = await fetch(`${getBaseUrl()}/stories`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: createHeaders(accessToken),
     })
 
     if (!response.ok) {
@@ -68,8 +79,10 @@ export const api = {
     return response.json()
   },
 
-  async getStory(id: string): Promise<Story> {
-    const response = await fetch(`${getBaseUrl()}/stories/${id}`)
+  async getStory(id: string, accessToken?: string): Promise<Story> {
+    const response = await fetch(`${getBaseUrl()}/stories/${id}`, {
+      headers: createHeaders(accessToken),
+    })
     if (!response.ok) {
       if (response.status === 404) {
         throw new Error('Story not found')
@@ -79,8 +92,10 @@ export const api = {
     return response.json()
   },
 
-  async getStories(): Promise<StorySummary[]> {
-    const response = await fetch(`${getBaseUrl()}/stories/`)
+  async getStories(accessToken?: string): Promise<StorySummary[]> {
+    const response = await fetch(`${getBaseUrl()}/stories/`, {
+      headers: createHeaders(accessToken),
+    })
     if (!response.ok) {
       if (response.status === 404) {
         throw new Error('Story not found')
@@ -90,12 +105,10 @@ export const api = {
     return response.json()
   },
 
-  async executeCommand(storyId: string, command: CommandRequest): Promise<CommandResponse> {
+  async executeCommand(storyId: string, command: CommandRequest, accessToken?: string): Promise<CommandResponse> {
     const response = await fetch(`${getBaseUrl()}/stories/${storyId}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: createHeaders(accessToken),
       body: JSON.stringify(command),
     })
 

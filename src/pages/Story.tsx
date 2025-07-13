@@ -1,18 +1,52 @@
-import { useLoaderData } from 'react-router-dom'
-import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
 import type { Story as StoryType, Character, Message } from '../services/api'
 import { api } from '../services/api'
 import MessageHistory from '../components/MessageHistory'
 
-interface StoryLoaderData {
-  story: StoryType
-}
-
 const Story = () => {
-  const { story } = useLoaderData() as StoryLoaderData
-  const [currentMessages, setCurrentMessages] = useState<Message[]>(story.current_messages || [])
+  const { storyId } = useParams<{ storyId: string }>()
+  const { getAccessTokenSilently, isLoading: authLoading } = useAuth0()
+  const [story, setStory] = useState<StoryType | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [currentMessages, setCurrentMessages] = useState<Message[]>([])
+
+  useEffect(() => {
+    const fetchStory = async () => {
+      if (!storyId || authLoading) return
+
+      try {
+        setLoading(true)
+        const accessToken = await getAccessTokenSilently({
+          authorizationParams: {
+            audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
+            scope: "storyteller:use"
+          }
+        })
+        
+        const fetchedStory = await api.getStory(storyId, accessToken)
+        setStory(fetchedStory)
+        setCurrentMessages(fetchedStory.current_messages || [])
+      } catch (err) {
+        console.error('Error fetching story:', err)
+        if (err instanceof Error && err.message === 'Story not found') {
+          setError('Story not found')
+        } else {
+          setError('Failed to load story')
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchStory()
+  }, [storyId, getAccessTokenSilently, authLoading])
 
   const handleMessageSubmit = async (content: string) => {
+    if (!story) return
+
     const newMessage: Message = {
       type: 'HumanMessage',
       content,
@@ -27,10 +61,17 @@ const Story = () => {
     setCurrentMessages(prev => [...prev, loadingMessage])
 
     try {
+      const accessToken = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
+          scope: "storyteller:use"
+        }
+      })
+      
       const response = await api.executeCommand(story.id, {
         command: 'chat',
         body: content
-      })
+      }, accessToken)
       
       setCurrentMessages(prev => prev.slice(0, -1))
       
@@ -44,6 +85,38 @@ const Story = () => {
       console.error('Failed to send message:', error)
       setCurrentMessages(prev => prev.slice(0, -1))
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading story...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="text-center py-12">
+          <div className="text-red-600 text-xl mb-4">{error}</div>
+          <p className="text-gray-600">Please check the URL and try again.</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!story) {
+    return (
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="text-center py-12">
+          <div className="text-gray-600">Story not found</div>
+        </div>
+      </div>
+    )
   }
 
   return (
