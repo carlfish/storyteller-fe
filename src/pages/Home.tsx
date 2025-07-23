@@ -39,8 +39,21 @@ const Home = () => {
     }
   }, [isAuthenticated, authLoading, getAccessTokenSilently])
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString()
+  const formatDate = (isoString: string) => {
+    return new Date(isoString).toLocaleDateString()
+  }
+
+  const formatRelativeTime = (isoString: string) => {
+    const date = new Date(isoString)
+    const now = new Date()
+    const diffTime = Math.abs(now.getTime() - date.getTime())
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+    
+    if (diffDays === 1) return '1 day ago'
+    if (diffDays < 7) return `${diffDays} days ago`
+    if (diffDays < 30) return `${Math.ceil(diffDays / 7)} weeks ago`
+    if (diffDays < 365) return `${Math.ceil(diffDays / 30)} months ago`
+    return `${Math.ceil(diffDays / 365)} years ago`
   }
 
   if (authLoading) {
@@ -99,26 +112,25 @@ const Home = () => {
                 to={`/stories/${story.id}`}
                 className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-200 hover:border-blue-300"
               >
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
+                <div className="mb-4">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
                     {story.title}
                   </h3>
-                  <span
-                    className={`px-2 py-1 text-xs rounded-full ${
-                      story.published
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-yellow-100 text-yellow-800'
-                    }`}
-                  >
-                    {story.published ? 'Published' : 'Draft'}
-                  </span>
+                  <div className="flex gap-4 text-sm text-gray-600">
+                    <span className="flex items-center gap-1">
+                      <i className="mi-people text-blue-500" />
+                      {story.characters} characters
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <i className="mi-list text-green-500" />
+                      {story.chapters} chapters
+                    </span>
+                  </div>
                 </div>
 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{story.summary}</p>
-
                 <div className="text-xs text-gray-500">
-                  <div>By {story.author}</div>
-                  <div>Updated {formatDate(story.updatedAt)}</div>
+                  <div>Created {formatDate(story.created)}</div>
+                  <div>Updated {formatRelativeTime(story.last_modified)}</div>
                 </div>
               </Link>
             ))}

@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useState, useEffect, useCallback } from 'react'
+import type { ReactNode } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import type { Story as StoryType, Message } from '../services/api'
@@ -14,15 +15,7 @@ interface StoryContextType {
   refreshStory: () => Promise<void>
 }
 
-const StoryContext = createContext<StoryContextType | undefined>(undefined)
-
-export const useStory = () => {
-  const context = useContext(StoryContext)
-  if (context === undefined) {
-    throw new Error('useStory must be used within a StoryProvider')
-  }
-  return context
-}
+export const StoryContext = createContext<StoryContextType | undefined>(undefined)
 
 interface StoryProviderProps {
   children: ReactNode
@@ -36,7 +29,7 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
   const [error, setError] = useState<string | null>(null)
   const [currentMessages, setCurrentMessages] = useState<Message[]>([])
 
-  const fetchStory = async () => {
+  const fetchStory = useCallback(async () => {
     if (!storyId || authLoading) return
 
     try {
@@ -62,7 +55,7 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [storyId, authLoading, getAccessTokenSilently])
 
   const handleMessageSubmit = async (content: string) => {
     if (!story) return
@@ -116,7 +109,7 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
 
   useEffect(() => {
     fetchStory()
-  }, [storyId, authLoading])
+  }, [fetchStory])
 
   const value: StoryContextType = {
     story,

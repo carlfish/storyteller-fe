@@ -1,6 +1,6 @@
 import type { Character } from '../services/api'
 import StoryTopbar from '../components/StoryTopbar'
-import { useStory } from '../contexts/StoryContext'
+import { useStory } from '../hooks/useStory'
 
 const Characters = () => {
   const { story, loading, error } = useStory()
@@ -51,8 +51,6 @@ const Characters = () => {
       <StoryTopbar />
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h1 className="text-2xl font-bold text-gray-800 mb-6">Characters</h1>
-          
           {/* Floating Character Navigation */}
           {story.characters && story.characters.length > 3 && (
             <div className="sticky top-0 z-10 bg-white border-b border-gray-200 -mx-6 px-6 py-3 mb-6">

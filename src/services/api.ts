@@ -1,6 +1,7 @@
 // Real API types based on the OpenAPI spec
 export interface Story {
   id: string
+  title: string
   characters: Character[]
   chapters: object[]
   scenes: object[]
@@ -11,6 +12,12 @@ export interface Character {
   name: string
   role: string
   bio: string
+}
+
+export interface Chapter {
+  title?: string
+  summary?: string
+  content?: string
 }
 
 export interface CreateStoryResponse {
@@ -39,11 +46,10 @@ export interface Message {
 export interface StorySummary {
   id: string
   title: string
-  author: string
-  summary: string
-  createdAt: string
-  updatedAt: string
-  published: boolean
+  chapters: number
+  characters: number
+  created: string
+  last_modified: string
 }
 
 // Get base URL from environment variable

@@ -1,5 +1,5 @@
 import { withAuthenticationRequired } from '@auth0/auth0-react'
-import { ReactElement } from 'react'
+import type { ReactElement } from 'react'
 
 interface ProtectedRouteProps {
   children: ReactElement

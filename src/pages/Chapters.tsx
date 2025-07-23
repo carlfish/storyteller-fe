@@ -1,5 +1,6 @@
 import StoryTopbar from '../components/StoryTopbar'
-import { useStory } from '../contexts/StoryContext'
+import type { Chapter } from '../services/api'
+import { useStory } from '../hooks/useStory'
 
 const Chapters = () => {
   const { story, loading, error } = useStory()
@@ -54,7 +55,7 @@ const Chapters = () => {
           
           {story.chapters && story.chapters.length > 0 ? (
             <div className="space-y-4">
-              {story.chapters.map((chapter: any, index: number) => (
+              {story.chapters.map((chapter: Chapter, index: number) => (
                 <div
                   key={index}
                   className="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-blue-300 transition-colors"
