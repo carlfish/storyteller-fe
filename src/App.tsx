@@ -8,7 +8,9 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       <Sidebar isCollapsed={isSidebarCollapsed} onToggle={setIsSidebarCollapsed} />
-      <div className={`flex-1 transition-all duration-300 ${isSidebarCollapsed ? 'ml-16' : 'ml-64'}`}>
+      <div
+        className={`flex-1 transition-all duration-300 ${isSidebarCollapsed ? 'ml-16' : 'ml-64'}`}
+      >
         <div className="p-8">
           <Outlet />
         </div>

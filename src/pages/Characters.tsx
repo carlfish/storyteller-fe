@@ -74,7 +74,7 @@ const Characters = () => {
               </div>
             </div>
           )}
-          
+
           {story.characters && story.characters.length > 0 ? (
             <div className="space-y-6">
               {story.characters.map((character: Character, index: number) => (
@@ -102,9 +102,7 @@ const Characters = () => {
                 <i className="mi-people text-2xl text-gray-400" />
               </div>
               <h3 className="text-lg font-medium text-gray-700 mb-2">No Characters Yet</h3>
-              <p className="text-gray-500">
-                Characters will appear here as your story develops.
-              </p>
+              <p className="text-gray-500">Characters will appear here as your story develops.</p>
             </div>
           )}
         </div>

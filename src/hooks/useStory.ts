@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { StoryContext } from '../contexts/StoryContext'
+import { StoryContext } from '../contexts/StoryContextDefinition'
 
 export const useStory = () => {
   const context = useContext(StoryContext)

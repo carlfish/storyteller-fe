@@ -5,7 +5,12 @@ import { api } from '../services/api'
 import type { StorySummary } from '../services/api'
 
 const Home = () => {
-  const { isAuthenticated, isLoading: authLoading, loginWithRedirect, getAccessTokenSilently } = useAuth0()
+  const {
+    isAuthenticated,
+    isLoading: authLoading,
+    loginWithRedirect,
+    getAccessTokenSilently,
+  } = useAuth0()
   const [stories, setStories] = useState<StorySummary[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -22,8 +27,8 @@ const Home = () => {
           const accessToken = await getAccessTokenSilently({
             authorizationParams: {
               audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
-              scope: "storyteller:use"
-            }
+              scope: 'storyteller:use',
+            },
           })
           const fetchedStories = await api.getStories(accessToken)
           setStories(fetchedStories)
@@ -48,7 +53,7 @@ const Home = () => {
     const now = new Date()
     const diffTime = Math.abs(now.getTime() - date.getTime())
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    
+
     if (diffDays === 1) return '1 day ago'
     if (diffDays < 7) return `${diffDays} days ago`
     if (diffDays < 30) return `${Math.ceil(diffDays / 7)} weeks ago`
@@ -113,9 +118,7 @@ const Home = () => {
                 className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-200 hover:border-blue-300"
               >
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                    {story.title}
-                  </h3>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{story.title}</h3>
                   <div className="flex gap-4 text-sm text-gray-600">
                     <span className="flex items-center gap-1">
                       <i className="mi-people text-blue-500" />

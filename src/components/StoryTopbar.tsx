@@ -27,7 +27,7 @@ const StoryTopbar = () => {
             <i className="mi-book text-lg" />
             <span>Story</span>
           </Link>
-          
+
           <Link
             to={getTabPath('characters')}
             className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors ${
@@ -39,7 +39,7 @@ const StoryTopbar = () => {
             <i className="mi-people text-lg" />
             <span>Characters</span>
           </Link>
-          
+
           <Link
             to={getTabPath('chapters')}
             className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors ${

@@ -62,11 +62,11 @@ const createHeaders = (accessToken?: string) => {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   }
-  
+
   if (accessToken) {
     headers.Authorization = `Bearer ${accessToken}`
   }
-  
+
   return headers
 }
 
@@ -111,7 +111,11 @@ export const api = {
     return response.json()
   },
 
-  async executeCommand(storyId: string, command: CommandRequest, accessToken?: string): Promise<CommandResponse> {
+  async executeCommand(
+    storyId: string,
+    command: CommandRequest,
+    accessToken?: string
+  ): Promise<CommandResponse> {
     const response = await fetch(`${getBaseUrl()}/stories/${storyId}`, {
       method: 'POST',
       headers: createHeaders(accessToken),

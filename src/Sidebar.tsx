@@ -23,10 +23,10 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
       const accessToken = await getAccessTokenSilently({
         authorizationParams: {
           audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
-          scope: "storyteller:use"
-        }
+          scope: 'storyteller:use',
+        },
       })
-      
+
       const story = await api.createStory(accessToken)
       navigate(`/stories/${story.id}`)
     } catch (error) {
@@ -76,9 +76,11 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
   }, [isDropdownOpen])
 
   return (
-    <div className={`fixed top-0 left-0 h-full bg-white border-r border-gray-300 transition-all duration-300 z-40 ${
-      isCollapsed ? 'w-16' : 'w-64'
-    }`}>
+    <div
+      className={`fixed top-0 left-0 h-full bg-white border-r border-gray-300 transition-all duration-300 z-40 ${
+        isCollapsed ? 'w-16' : 'w-64'
+      }`}
+    >
       {/* Toggle Button */}
       <button
         onClick={toggleSidebar}
@@ -90,7 +92,10 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
       <div className="flex flex-col h-full p-4">
         {/* Brand */}
         <div className="mb-8">
-          <Link to="/" className="flex items-center gap-3 text-2xl font-bold hover:text-blue-600 transition-colors">
+          <Link
+            to="/"
+            className="flex items-center gap-3 text-2xl font-bold hover:text-blue-600 transition-colors"
+          >
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
               <i className="mi-book text-lg" />
             </div>
@@ -103,18 +108,22 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
           <Link
             to="/"
             className={`flex items-center gap-3 px-3 py-3 rounded transition-colors ${
-              isActive('/') ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
+              isActive('/')
+                ? 'bg-blue-100 text-blue-700'
+                : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
             }`}
             title={isCollapsed ? 'Home' : ''}
           >
             <i className="mi-home text-lg" />
             {!isCollapsed && <span>Home</span>}
           </Link>
-          
+
           <Link
             to="/about"
             className={`flex items-center gap-3 px-3 py-3 rounded transition-colors ${
-              isActive('/about') ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
+              isActive('/about')
+                ? 'bg-blue-100 text-blue-700'
+                : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
             }`}
             title={isCollapsed ? 'About' : ''}
           >
@@ -188,7 +197,9 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
 
           {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className={`absolute ${isCollapsed ? 'left-16 bottom-0' : 'right-0 bottom-16'} w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50`}>
+            <div
+              className={`absolute ${isCollapsed ? 'left-16 bottom-0' : 'right-0 bottom-16'} w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50`}
+            >
               <div className="py-1">
                 {isAuthenticated && user && isCollapsed && (
                   <div className="px-4 py-2 border-b border-gray-100">

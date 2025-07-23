@@ -1,21 +1,10 @@
-import { createContext, useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { ReactNode } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import type { Story as StoryType, Message } from '../services/api'
 import { api } from '../services/api'
-
-interface StoryContextType {
-  story: StoryType | null
-  loading: boolean
-  error: string | null
-  currentMessages: Message[]
-  setCurrentMessages: (messages: Message[]) => void
-  handleMessageSubmit: (content: string) => Promise<void>
-  refreshStory: () => Promise<void>
-}
-
-export const StoryContext = createContext<StoryContextType | undefined>(undefined)
+import { StoryContext, type StoryContextType } from './StoryContextDefinition'
 
 interface StoryProviderProps {
   children: ReactNode
@@ -37,10 +26,10 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
       const accessToken = await getAccessTokenSilently({
         authorizationParams: {
           audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
-          scope: "storyteller:use"
-        }
+          scope: 'storyteller:use',
+        },
       })
-      
+
       const fetchedStory = await api.getStory(storyId, accessToken)
       setStory(fetchedStory)
       setCurrentMessages(fetchedStory.current_messages || [])
@@ -69,7 +58,7 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
     const loadingMessage: Message = {
       type: 'AIMessage',
       content: '',
-      isLoading: true
+      isLoading: true,
     }
     setCurrentMessages(prev => [...prev, loadingMessage])
 
@@ -77,26 +66,27 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
       const accessToken = await getAccessTokenSilently({
         authorizationParams: {
           audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
-          scope: "storyteller:use"
-        }
+          scope: 'storyteller:use',
+        },
       })
-      
-      const response = await api.executeCommand(story.id, {
-        command: 'chat',
-        body: content
-      }, accessToken)
-      
+
+      const response = await api.executeCommand(
+        story.id,
+        {
+          command: 'chat',
+          body: content,
+        },
+        accessToken
+      )
+
       setCurrentMessages(prev => prev.slice(0, -1))
-      
+
       const aiMessages: Message[] = response.messages.map(messageContent => ({
         type: 'AIMessage',
-        content: messageContent
+        content: messageContent,
       }))
-      
-      setCurrentMessages(prev => [...prev, ...aiMessages])
 
-      // Refresh story data to get updated characters/chapters
-      await fetchStory()
+      setCurrentMessages(prev => [...prev, ...aiMessages])
     } catch (error) {
       console.error('Failed to send message:', error)
       setCurrentMessages(prev => prev.slice(0, -1))
@@ -118,7 +108,7 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
     currentMessages,
     setCurrentMessages,
     handleMessageSubmit,
-    refreshStory
+    refreshStory,
   }
 
   return <StoryContext.Provider value={value}>{children}</StoryContext.Provider>

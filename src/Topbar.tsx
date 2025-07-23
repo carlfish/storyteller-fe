@@ -18,10 +18,10 @@ const Topbar = () => {
       const accessToken = await getAccessTokenSilently({
         authorizationParams: {
           audience: import.meta.env.VITE_AUTH0_SERVER_AUDIENCE,
-          scope: "storyteller:use"
-        }
+          scope: 'storyteller:use',
+        },
       })
-      
+
       // Call the real create story API
       const story = await api.createStory(accessToken)
 

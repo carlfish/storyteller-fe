@@ -90,7 +90,7 @@ const MessageHistory = ({ oldMessages, currentMessages, onMessageSubmit }: Messa
   }, [displayedMessages.length, isLoadingMore])
 
   const formatMessage = (message: Message, index: number) => {
-    const isUserMessage = message.type === 'HumanMessage' || message.type === "human"
+    const isUserMessage = message.type === 'HumanMessage' || message.type === 'human'
     const isLoading = message.isLoading
 
     return (

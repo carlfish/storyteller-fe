@@ -16,7 +16,7 @@ export const handlers = [
     // Create empty story object matching the real API schema
     const story: Story = {
       id: storyId,
-      title: "Untitled",
+      title: 'Untitled',
       characters: [],
       chapters: [],
       scenes: [],
@@ -75,7 +75,7 @@ export const handlers = [
       },
       {
         id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-        title: 'Dragon\'s Quest',
+        title: "Dragon's Quest",
         characters: 8,
         chapters: 7,
         created: '2024-01-01T00:00:00Z',

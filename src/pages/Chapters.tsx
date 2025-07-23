@@ -52,7 +52,7 @@ const Chapters = () => {
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-6">Chapters</h1>
-          
+
           {story.chapters && story.chapters.length > 0 ? (
             <div className="space-y-4">
               {story.chapters.map((chapter: Chapter, index: number) => (
@@ -69,16 +69,13 @@ const Chapters = () => {
                     </h3>
                   </div>
                   {chapter.summary && (
-                    <p className="text-gray-600 text-sm leading-relaxed ml-11">
-                      {chapter.summary}
-                    </p>
+                    <p className="text-gray-600 text-sm leading-relaxed ml-11">{chapter.summary}</p>
                   )}
                   {chapter.content && (
                     <p className="text-gray-600 text-sm leading-relaxed ml-11 mt-2">
-                      {chapter.content.length > 200 
+                      {chapter.content.length > 200
                         ? `${chapter.content.substring(0, 200)}...`
-                        : chapter.content
-                      }
+                        : chapter.content}
                     </p>
                   )}
                 </div>
@@ -90,9 +87,7 @@ const Chapters = () => {
                 <i className="mi-list text-2xl text-gray-400" />
               </div>
               <h3 className="text-lg font-medium text-gray-700 mb-2">No Chapters Yet</h3>
-              <p className="text-gray-500">
-                Chapters will appear here as your story progresses.
-              </p>
+              <p className="text-gray-500">Chapters will appear here as your story progresses.</p>
             </div>
           )}
         </div>
