@@ -47,7 +47,7 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
   }, [storyId, authLoading, getAccessTokenSilently])
 
   const handleMessageSubmit = async (content: string) => {
-    if (!story) return
+    if (!story || !storyId) return
 
     const newMessage: Message = {
       type: 'HumanMessage',
@@ -71,7 +71,7 @@ export const StoryProvider = ({ children }: StoryProviderProps) => {
       })
 
       const response = await api.executeCommand(
-        story.id,
+        storyId,
         {
           command: 'chat',
           body: content,

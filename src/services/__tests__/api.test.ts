@@ -23,7 +23,8 @@ describe('api', () => {
   describe('createStory', () => {
     test('creates a story successfully', async () => {
       const mockStory = {
-        id: 'story-123',
+        story_id: 'story-123',
+        title: 'Untitled',
         characters: [],
         chapters: [],
         scenes: [],
@@ -47,7 +48,7 @@ describe('api', () => {
   describe('getStory', () => {
     test('fetches a story successfully', async () => {
       const mockStory = {
-        id: 'story-123',
+        title: 'Untitled',
         characters: [],
         chapters: [],
         scenes: [],

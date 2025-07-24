@@ -15,7 +15,6 @@ export const handlers = [
 
     // Create empty story object matching the real API schema
     const story: Story = {
-      id: storyId,
       title: 'Untitled',
       characters: [],
       chapters: [],
@@ -34,13 +33,10 @@ export const handlers = [
   }),
 
   // Get single story - matches GET /stories/{story_uuid}
-  http.get(`${getBaseUrl()}/stories/:storyId`, ({ params }) => {
-    const { storyId } = params
-
+  http.get(`${getBaseUrl()}/stories/:storyId`, () => {
     // Load story data from JSON file and update the ID to match the request
     const story: Story = {
       ...mockStoryData,
-      id: storyId as string,
     }
 
     return HttpResponse.json(story)

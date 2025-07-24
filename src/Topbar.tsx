@@ -26,7 +26,7 @@ const Topbar = () => {
       const story = await api.createStory(accessToken)
 
       // Navigate to the story using the returned ID
-      navigate(`/stories/${story.id}`)
+      navigate(`/stories/${story.story_id}`)
     } catch (error) {
       console.error('Failed to create story:', error)
       // TODO: Show user-friendly error message

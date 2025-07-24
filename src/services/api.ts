@@ -1,6 +1,5 @@
 // Real API types based on the OpenAPI spec
 export interface Story {
-  id: string
   title: string
   characters: Character[]
   chapters: object[]
@@ -8,6 +7,11 @@ export interface Story {
   old_messages: Message[]
   current_messages: Message[]
 }
+
+export interface CreatedStory extends Story {
+  story_id: string
+}
+
 export interface Character {
   name: string
   role: string
@@ -71,7 +75,7 @@ const createHeaders = (accessToken?: string) => {
 }
 
 export const api = {
-  async createStory(accessToken?: string): Promise<Story> {
+  async createStory(accessToken?: string): Promise<CreatedStory> {
     const response = await fetch(`${getBaseUrl()}/stories`, {
       method: 'POST',
       headers: createHeaders(accessToken),

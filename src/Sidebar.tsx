@@ -28,7 +28,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
       })
 
       const story = await api.createStory(accessToken)
-      navigate(`/stories/${story.id}`)
+      navigate(`/stories/${story.story_id}`)
     } catch (error) {
       console.error('Failed to create story:', error)
     }
